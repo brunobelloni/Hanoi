@@ -5,9 +5,7 @@ from Methods import Cordenadas
 from Methods import CorRandomica
 
 imagem = cv2.imread('imagens/4.jpg')
-
 cinza = cv2.cvtColor(imagem, cv2.COLOR_BGR2GRAY)
-
 ret, thresh = cv2.threshold(cinza, 100, 255, cv2.THRESH_BINARY_INV)
 
 '''
@@ -19,7 +17,6 @@ opening = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, kernel, iterations = 2)
 '''
 
 thresh, contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-
 Xa, Ya, Ra = Cordenadas(cinza)
 
 contador = 0
@@ -39,5 +36,4 @@ for contour in contours:
             cv2.putText(imagem, "P: " + str(per), (int(Xa), int(Ya) + 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2, cv2.LINE_AA)
 
 cv2.imwrite("Final " + str(contador) + ".jpg", imagem)
-
 print("Ok")
