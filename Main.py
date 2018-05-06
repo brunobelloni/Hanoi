@@ -10,7 +10,7 @@ for contour in contours:
     area = cv2.contourArea(contour)
     if 80 < area < 3500:
         (x, y), r = cv2.minEnclosingCircle(contour)
-        dist = ut.getDistAb(x2, x, y2, y)
+        dist = ut.getDistAb(x2, x, y2, y) 
 
         if  dist < r2 - 300:
             per = cv2.arcLength(contour, True)
