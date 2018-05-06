@@ -1,0 +1,50 @@
+#include <cstdlib>
+
+/** Função que mostra as torres de Hanoi */
+
+void getBranco(int valor) {
+    for(int j = 0; j < valor; j++) {
+        cout << " ";
+    }
+}
+
+void getPilhas(int valor) {
+    string hifen = "";
+
+    for(int j = 0; j < valor; j++) {
+        hifen += "-";
+    }
+
+    cout << hifen << "|" << hifen;
+}
+
+void Mostra(Pilha *H1, Pilha *H2, Pilha *H3, int jogadas, bool venceu) {
+    system("cls");
+
+    if(!venceu) {
+        if(jogadas != 0) {
+            cout << "Você possui " << jogadas << " jogadas!" << endl << endl;
+        }
+    }
+
+    for(int x = H1 -> tam - 1; x > H1 -> base; x--) {
+        ///Mostra Hanoi 1
+        getBranco(H1 -> tam - H1 -> dados[x]);
+        getPilhas(H1 -> dados[x]);
+        getBranco(H1 -> tam - H1 -> dados[x]);
+
+        ///Mostra Hanoi 2
+        getBranco(H1 -> tam - H2 -> dados[x]);
+        getPilhas(H2 -> dados[x]);
+        getBranco(H1 -> tam - H2 -> dados[x]);
+
+        ///Mostra Hanoi 3
+        getBranco(H1 -> tam - H3 -> dados[x]);
+        getPilhas(H3 -> dados[x]);
+        getBranco(H1 -> tam - H3 -> dados[x]);
+
+        cout << endl;
+    }
+
+    cout << "---------------------------------------------------" << endl;
+}
