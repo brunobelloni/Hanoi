@@ -1,0 +1,111 @@
+#include <cstdio>
+
+/** Função que executa as jogadas */
+
+bool Jogada(Pilha *H1, Pilha *H2, Pilha *H3) {
+    string escolha;
+    string enviar;
+    int pop;
+
+    cout << "     [O]rigem        [T]rabalho        [D]estino" << endl;
+    cout << "\nEscolha a pilha de onde deseja retirar um disco: ";
+    getline(cin, escolha);
+    fflush(stdin);
+
+
+    if(escolha == "o" || escolha == "O") {
+        if(Underflow(H1))
+            return false;
+
+        cout << "\nVocê escolheu remover um disco da ORIGEM!" << endl;
+        cout << "\nEscolha para onde deseja enviar o disco: ";
+        getline(cin, enviar);
+        fflush(stdin);
+
+        if(enviar == "t" || enviar == "T") {
+            ///Pop na H1 e PUSH na H2
+            if(Peek(H1) < Peek(H2) || Underflow(H2)) {
+                pop = Pop(H1);
+                Push(H2, pop);
+                return true;
+            } else {
+                return false;
+            }
+        } else if(enviar == "d" || enviar == "D") {
+            ///Pop na H1 e PUSH na H3
+            if(Peek(H1) < Peek(H3) || Underflow(H3)) {
+                pop = Pop(H1);
+                Push(H3, pop);
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+
+    } else if(escolha == "t" || escolha == "T") {
+        if(Underflow(H2))
+            return false;
+
+        cout << "\nVocê escolheu remover um disco do TRABALHO!" << endl;
+        cout << "\nEscolha para onde deseja enviar o disco: ";
+        getline(cin, enviar);
+        fflush(stdin);
+
+        if(enviar == "o" || enviar == "O") {
+            ///Pop na H2 e PUSH na H1
+            if(Peek(H2) < Peek(H1) || Underflow(H1)) {
+                pop = Pop(H2);
+                Push(H1, pop);
+                return true;
+            } else {
+                return false;
+            }
+        } else if(enviar == "d" || enviar == "D") {
+            ///Pop na H2 e PUSH na H3
+            if(Peek(H2) < Peek(H3) || Underflow(H3)) {
+                pop = Pop(H2);
+                Push(H3, pop);
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+    if(escolha == "d" || escolha == "D") {
+        if(Underflow(H3))
+            return false;
+
+        cout << "\nVocê escolheu remover um disco do DESTINO!" << endl;
+        cout << "\nEscolha para onde deseja enviar o disco: ";
+        getline(cin, enviar);
+        fflush(stdin);
+
+        if(enviar == "t" || enviar == "T") {
+            ///Pop na H2 e PUSH na H2
+            if(Peek(H3) < Peek(H2)|| Underflow(H2)) {
+                pop = Pop(H3);
+                Push(H2, pop);
+                return true;
+            } else {
+                return false;
+            }
+        } else if(enviar == "o" || enviar == "O") {
+            ///Pop na H2 e PUSH na H1
+            if(Peek(H3) < Peek(H1) || Underflow(H1)) {
+                pop = Pop(H3);
+                Push(H1, pop);
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
