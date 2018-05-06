@@ -37,7 +37,7 @@ def getColor():
         return 255, 0, 0
     elif sort == 2:
         return 0, 255, 0
-    elif sort == 3:
+    elif sort == 3: 
         return 0, 0, 255
 
 def getDistAb(xC, xA, yC, yA):
