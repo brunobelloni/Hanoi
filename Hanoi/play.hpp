@@ -2,10 +2,10 @@
 
 /** Função que executa as jogadas */
 
-bool Jogada(Pilha *H1, Pilha *H2, Pilha *H3) {
+bool Jogada(Stack *H1, Stack *H2, Stack *H3) {
     string escolha;
     string enviar;
-    int pop;
+    int popValue;
 
     cout << "     [O]rigem        [T]rabalho        [D]estino" << endl;
     cout << "\nEscolha a pilha de onde deseja retirar um disco: ";
@@ -14,7 +14,7 @@ bool Jogada(Pilha *H1, Pilha *H2, Pilha *H3) {
 
 
     if(escolha == "o" || escolha == "O") {
-        if(Underflow(H1))
+        if(underflow(H1))
             return false;
 
         cout << "\nVocê escolheu remover um disco da ORIGEM!" << endl;
@@ -24,18 +24,18 @@ bool Jogada(Pilha *H1, Pilha *H2, Pilha *H3) {
 
         if(enviar == "t" || enviar == "T") {
             ///Pop na H1 e PUSH na H2
-            if(Peek(H1) < Peek(H2) || Underflow(H2)) {
-                pop = Pop(H1);
-                Push(H2, pop);
+            if(peek(H1) < peek(H2) || underflow(H2)) {
+                popValue = pop(H1);
+                push(H2, popValue);
                 return true;
             } else {
                 return false;
             }
         } else if(enviar == "d" || enviar == "D") {
             ///Pop na H1 e PUSH na H3
-            if(Peek(H1) < Peek(H3) || Underflow(H3)) {
-                pop = Pop(H1);
-                Push(H3, pop);
+            if(peek(H1) < peek(H3) || underflow(H3)) {
+                popValue = pop(H1);
+                push(H3, popValue);
                 return true;
             } else {
                 return false;
@@ -45,7 +45,7 @@ bool Jogada(Pilha *H1, Pilha *H2, Pilha *H3) {
         }
 
     } else if(escolha == "t" || escolha == "T") {
-        if(Underflow(H2))
+        if(underflow(H2))
             return false;
 
         cout << "\nVocê escolheu remover um disco do TRABALHO!" << endl;
@@ -55,18 +55,18 @@ bool Jogada(Pilha *H1, Pilha *H2, Pilha *H3) {
 
         if(enviar == "o" || enviar == "O") {
             ///Pop na H2 e PUSH na H1
-            if(Peek(H2) < Peek(H1) || Underflow(H1)) {
-                pop = Pop(H2);
-                Push(H1, pop);
+            if(peek(H2) < peek(H1) || underflow(H1)) {
+                popValue = pop(H2);
+                push(H1, popValue);
                 return true;
             } else {
                 return false;
             }
         } else if(enviar == "d" || enviar == "D") {
             ///Pop na H2 e PUSH na H3
-            if(Peek(H2) < Peek(H3) || Underflow(H3)) {
-                pop = Pop(H2);
-                Push(H3, pop);
+            if(peek(H2) < peek(H3) || underflow(H3)) {
+                popValue = pop(H2);
+                push(H3, popValue);
                 return true;
             } else {
                 return false;
@@ -76,7 +76,7 @@ bool Jogada(Pilha *H1, Pilha *H2, Pilha *H3) {
         }
     }
     if(escolha == "d" || escolha == "D") {
-        if(Underflow(H3))
+        if(underflow(H3))
             return false;
 
         cout << "\nVocê escolheu remover um disco do DESTINO!" << endl;
@@ -86,18 +86,18 @@ bool Jogada(Pilha *H1, Pilha *H2, Pilha *H3) {
 
         if(enviar == "t" || enviar == "T") {
             ///Pop na H2 e PUSH na H2
-            if(Peek(H3) < Peek(H2)|| Underflow(H2)) {
-                pop = Pop(H3);
-                Push(H2, pop);
+            if(peek(H3) < peek(H2)|| underflow(H2)) {
+                popValue = pop(H3);
+                push(H2, popValue);
                 return true;
             } else {
                 return false;
             }
         } else if(enviar == "o" || enviar == "O") {
             ///Pop na H2 e PUSH na H1
-            if(Peek(H3) < Peek(H1) || Underflow(H1)) {
-                pop = Pop(H3);
-                Push(H1, pop);
+            if(peek(H3) < peek(H1) || underflow(H1)) {
+                popValue = pop(H3);
+                push(H1, popValue);
                 return true;
             } else {
                 return false;

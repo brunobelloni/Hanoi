@@ -2,40 +2,40 @@
 
 using namespace std;
 
-#include "Pilha/ModeloPilha.hpp"
-#include "Hanoi/Jogada.hpp"
-#include "Hanoi/Mostra.hpp"
-#include "Hanoi/GeraDiscos.hpp"
+#include "Stack.hpp"
+#include "Hanoi/play.hpp"
+#include "Hanoi/show.hpp"
+#include "Hanoi/generateDisks.hpp"
 
 int main() {
     setlocale(LC_ALL, "portuguese");
 
-    Pilha H1, H2, H3;
+    Stack leftStack, centerStack, rightStack;
 
-    Set(&H1);
-    Set(&H2);
-    Set(&H3);
+    set(&leftStack);
+    set(&centerStack);
+    set(&rightStack);
 
-    H1.discos = H2.discos = H3.discos = getDiscos();
+    leftStack.disks = centerStack.disks = rightStack.disks = getDiscos();
 
-    int jogadas = getJogadas(&H1, H1.discos);
+    int remainingPlays = getJogadas(&leftStack, leftStack.disks);
 
-    while(jogadas > 0) {
-        Mostra(&H1, &H2, &H3, jogadas, false);
+    while(remainingPlays > 0) {
+        showAll(&leftStack, &centerStack, &rightStack, remainingPlays, false);
 
-        if(Jogada(&H1, &H2, &H3)) {
-            jogadas--;
+        if(Jogada(&leftStack, &centerStack, &rightStack)) {
+            remainingPlays--;
         } else {
             cout << "\nOpção inválida!" << endl;
             getchar();
         }
 
-        if(Overflow(&H3)) {
-            Mostra(&H1, &H2, &H3, jogadas, true);
+        if(overflow(&rightStack)) {
+            showAll(&leftStack, &centerStack, &rightStack, remainingPlays, true);
             cout << "\nVocê venceu o jogo, Parabéns!!!!" << endl;
             break;
         } else {
-            if(jogadas <= 0) {
+            if(remainingPlays <= 0) {
                 system("cls");
                 cout << "\nVocê perdeu, tente novamente!" << endl;
                 break;

@@ -27,9 +27,9 @@ int getDiscos() {
     return discos;
 }
 
-int getJogadas(Pilha *p, int discos) {
+int getJogadas(Stack *stack, int discos) {
     for(int i = discos; i >= 1; i--) {
-        Push(p, i);
+        push(stack, i);
     }
 
     int dificuldade = 1;
