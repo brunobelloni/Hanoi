@@ -2,7 +2,7 @@
 
 using namespace std;
 
-#include "Stack.hpp"
+#include "stack.hpp"
 #include "Hanoi/play.hpp"
 #include "Hanoi/show.hpp"
 #include "Hanoi/generateDisks.hpp"
