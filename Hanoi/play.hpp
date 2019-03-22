@@ -2,13 +2,18 @@
 
 enum TYPE {
     ORIGIN,
-    DESTINY,
     WORK,
+    DESTINY,
 };
 
-void logic(Stack context, Stack helper1, Stack helper2) {
+bool logic(Stack *toPop, Stack *toPush) {
+    if(toPop->peek() < toPush->peek() || toPush->underflow()) {
+        int popValue = toPop->pop();
+        toPush->push(popValue);
+        return true;
+    }
 
-
+    return false;
 }
 
 bool playLogic(Stack *leftStack, Stack *centerStack, Stack *rightStack) {
@@ -16,15 +21,13 @@ bool playLogic(Stack *leftStack, Stack *centerStack, Stack *rightStack) {
     string secondChoice;
     int popValue;
 
-    cout << "     [O]rigem        [T]rabalho        [D]estino" << endl;
+    cout << "     Origem[O]       Trabalho[T]      Destino[D]" << endl;
     cout << "\nEscolha a pilha de onde deseja retirar um disco: ";
     getline(cin, firstChoice);
     fflush(stdin);
 
-
-
     if(firstChoice == "o" || firstChoice == "O") {
-        if(underflow(leftStack)) {
+        if(leftStack->underflow()) {
             return false;
         }
 
@@ -33,29 +36,19 @@ bool playLogic(Stack *leftStack, Stack *centerStack, Stack *rightStack) {
         getline(cin, secondChoice);
         fflush(stdin);
 
+
         if(secondChoice == "t" || secondChoice == "T") {
-            if(peek(leftStack) < peek(centerStack) || underflow(centerStack)) {
-                popValue = pop(leftStack);
-                push(centerStack, popValue);
-                return true;
-            } else {
-                return false;
-            }
+            return logic(leftStack, centerStack);
         } else if(secondChoice == "d" || secondChoice == "D") {
-            if(peek(leftStack) < peek(rightStack) || underflow(rightStack)) {
-                popValue = pop(leftStack);
-                push(rightStack, popValue);
-                return true;
-            } else {
-                return false;
-            }
+            return logic(leftStack, rightStack);
         } else {
             return false;
         }
 
     } else if(firstChoice == "t" || firstChoice == "T") {
-        if(underflow(centerStack))
+        if(centerStack->underflow()) {
             return false;
+        }
 
         cout << "\nVocê escolheu remover um disco do TRABALHO!" << endl;
         cout << "\nEscolha para onde deseja enviar o disco: ";
@@ -63,28 +56,17 @@ bool playLogic(Stack *leftStack, Stack *centerStack, Stack *rightStack) {
         fflush(stdin);
 
         if(secondChoice == "o" || secondChoice == "O") {
-            if(peek(centerStack) < peek(leftStack) || underflow(leftStack)) {
-                popValue = pop(centerStack);
-                push(leftStack, popValue);
-                return true;
-            } else {
-                return false;
-            }
+            return logic(centerStack, leftStack);
         } else if(secondChoice == "d" || secondChoice == "D") {
-            if(peek(centerStack) < peek(rightStack) || underflow(rightStack)) {
-                popValue = pop(centerStack);
-                push(rightStack, popValue);
-                return true;
-            } else {
-                return false;
-            }
+            return logic(centerStack, rightStack);
         } else {
             return false;
         }
     }
     if(firstChoice == "d" || firstChoice == "D") {
-        if(underflow(rightStack))
+        if(rightStack->underflow()) {
             return false;
+        }
 
         cout << "\nVocê escolheu remover um disco do DESTINO!" << endl;
         cout << "\nEscolha para onde deseja enviar o disco: ";
@@ -92,21 +74,9 @@ bool playLogic(Stack *leftStack, Stack *centerStack, Stack *rightStack) {
         fflush(stdin);
 
         if(secondChoice == "t" || secondChoice == "T") {
-            if(peek(rightStack) < peek(centerStack)|| underflow(centerStack)) {
-                popValue = pop(rightStack);
-                push(centerStack, popValue);
-                return true;
-            } else {
-                return false;
-            }
+            return logic(rightStack, centerStack);
         } else if(secondChoice == "o" || secondChoice == "O") {
-            if(peek(rightStack) < peek(leftStack) || underflow(leftStack)) {
-                popValue = pop(rightStack);
-                push(leftStack, popValue);
-                return true;
-            } else {
-                return false;
-            }
+            return logic(rightStack, leftStack);
         } else {
             return false;
         }

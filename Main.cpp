@@ -12,10 +12,6 @@ int main() {
 
     Stack leftStack, centerStack, rightStack;
 
-    set(&leftStack);
-    set(&centerStack);
-    set(&rightStack);
-
     leftStack.disks = centerStack.disks = rightStack.disks = getDisks();
 
     int remainingPlays = getJogadas(&leftStack, leftStack.disks);
@@ -30,7 +26,7 @@ int main() {
             getchar();
         }
 
-        if(overflow(&rightStack)) {
+        if(rightStack.overflow()) {
             showAll(&leftStack, &centerStack, &rightStack, remainingPlays, true);
             cout << "\nVocê venceu o jogo, Parabéns!!!!" << endl;
             break;

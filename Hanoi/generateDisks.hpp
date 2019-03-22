@@ -26,7 +26,7 @@ int getDisks() {
 
 int getJogadas(Stack *stack, int disks) {
     for(int i = disks; i >= 1; i--) {
-        push(stack, i);
+        stack->push(i);
     }
 
     int difficulty = 1;
