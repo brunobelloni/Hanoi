@@ -2,55 +2,52 @@
 
 /** Função que gera os discos e as jogadas */
 
-int getDiscos() {
-    int discos = 1;
+int getDisks() {
+    int disks = 1;
 
     cout << "O desafio deste jogo é mover todos os discos da haste de origem para a haste de destino \nutilizando uma haste auxiliar (haste trabalho) e atendendo a algumas regras: " << endl;
     cout << "\n- Somente um disco pode ser movido por vez" << endl;
     cout << "- Um disco maior nunca pode ser posicionado sobre um disco menor" << endl << endl;
 
-
-
     do {
-
-        if(discos < 1 || discos > 8) {
+        if(disks < 1 || disks > 8) {
             system("cls");
-            cout << discos << " não é um número válido!" << endl << endl;
+            cout << disks << " não é um número válido!" << endl << endl;
         }
 
         cout << "Escolha o número de discos (1 a 8): ";
-        cin >> discos;
+        cin >> disks;
         fflush(stdin);
 
-    } while(discos < 1 || discos > 8);
+    } while(disks < 1 || disks > 8);
 
-    return discos;
+    return disks;
 }
 
-int getJogadas(Stack *stack, int discos) {
-    for(int i = discos; i >= 1; i--) {
+int getJogadas(Stack *stack, int disks) {
+    for(int i = disks; i >= 1; i--) {
         push(stack, i);
     }
 
-    int dificuldade = 1;
+    int difficulty = 1;
 
     do {
         system("cls");
-        if(dificuldade < 0 || dificuldade > 1) {
-            cout << dificuldade << " não é um número válido!" << endl << endl;
+        if(difficulty < 0 || difficulty > 1) {
+            cout << difficulty << " não é um número válido!" << endl << endl;
         }
 
-        cout << "Selecione a dificuldade: " << endl;
+        cout << "Selecione a difficulty: " << endl;
         cout << "[0] Fácil " << endl;
         cout << "[1] Normal " << endl;
-        cin >> dificuldade;
+        cin >> difficulty;
         fflush(stdin);
 
-    } while(dificuldade < 0 || dificuldade > 1);
+    } while(difficulty < 0 || difficulty > 1);
 
-    if(dificuldade == 1) {
-        return (pow(2, discos) - 1);
-    } else if(dificuldade == 0) {
-        return (pow(2, discos) - 1) * 2;
+    if(difficulty == 1) {
+        return (pow(2, disks) - 1);
+    } else if(difficulty == 0) {
+        return (pow(2, disks) - 1) * 2;
     }
 }

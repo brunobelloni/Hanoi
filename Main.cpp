@@ -16,14 +16,14 @@ int main() {
     set(&centerStack);
     set(&rightStack);
 
-    leftStack.disks = centerStack.disks = rightStack.disks = getDiscos();
+    leftStack.disks = centerStack.disks = rightStack.disks = getDisks();
 
     int remainingPlays = getJogadas(&leftStack, leftStack.disks);
 
     while(remainingPlays > 0) {
         showAll(&leftStack, &centerStack, &rightStack, remainingPlays, false);
 
-        if(Jogada(&leftStack, &centerStack, &rightStack)) {
+        if(playLogic(&leftStack, &centerStack, &rightStack)) {
             remainingPlays--;
         } else {
             cout << "\nOpção inválida!" << endl;
